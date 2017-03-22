@@ -1,0 +1,55 @@
+//To use a mixin simply write:
+//@include [mixin name] {
+// [styles]
+//}
+
+@mixin sm {
+  @media only screen
+  and (min-device-width: 480px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media only screen
+  and (min-device-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media only screen
+  and (min-device-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin landscape-sm {
+  @media only screen
+  and (orientation: landscape){
+    @content;
+  }
+}
+
+@mixin sm-with-landscape {
+  @include sm { @content };
+  @include landscape-sm { @content };
+}
+
+@mixin iPhone6($orientation) {
+  @media only screen
+  and (min-device-width : 375px)
+  and (max-device-width : 667px){
+    @if ($orientation == landscape){
+      @media (orientation : landscape){
+        @content;
+      }
+    } @else if ($orientation == portrait){
+      @media (orientation : portrait){
+        @content;
+      }
+    } @else {
+      @content;
+    }
+  }
+}
