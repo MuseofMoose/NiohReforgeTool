@@ -8,7 +8,22 @@ export default {
   name: 'news',
   data () {
     return {
-      msg: 'Welcome to the equipment reforging tool.'
+      weaponAttributes: []
+    }
+  },
+  mounted () {
+    this.getAllWeaponAttributes()
+  },
+  methods: {
+    getAllWeaponAttributes () {
+      this.$http.get('http://localhost:3000/api/v1/weapon_attributes/get_all').then(
+        response => {
+          this.weaponAttributes = response.body.result_data.data
+        },
+        response => {
+          console.log('error')
+        }
+      )
     }
   }
 }
